@@ -6,7 +6,19 @@ current
 <ul>
     {% if todos %}
         {% for todo in todos %}
-            <li>{{ todo.title }}</li>
+            
+                <li>
+                    {% if todo.important %}
+                        <b>{{ todo.title }}</b>
+                    {% else %}
+                        {{ todo.title }}
+                    {% endif %}
+
+                    {% if todo.memo %}
+                        - {{ todo.memo }}
+                    {% endif %}
+                </li>
+                
         {% endfor %}
     {% endif %}
 </ul>

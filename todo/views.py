@@ -107,7 +107,17 @@ def createtodo(request):
         except ValueError:
             return render(request, 'todo/createtodo.html', {'form':TodoForm(), 'error':'Bad data passed in. Try again.'})
 
+#do this first
+# def currenttodos(request):
+#     todos = Todo.objects.all()
+#     return render(request, 'todo/currenttodos.html', {'todos': todos })
+
+#do this to show only your own todos
+# def currenttodos(request):
+#     todos = Todo.objects.filter(user=request.user)
+#     return render(request, 'todo/currenttodos.html', {'todos': todos })
+
 def currenttodos(request):
-    todos = Todo.objects.all()
+    todos = Todo.objects.filter(user=request.user, datecompleted__isnull=True) #special naming convention by django model
     return render(request, 'todo/currenttodos.html', {'todos': todos })
 

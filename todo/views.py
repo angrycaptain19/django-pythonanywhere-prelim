@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm #go ahead and create a form and pass it to the template
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm #go ahead and create a form and pass it to the template
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
 
@@ -74,6 +74,18 @@ def signupuser(request):
         else:
             return render(request, 'todo/signupuser.html', {'form': UserCreationForm(), 'error': 'Passwords did not match'})
 
+def loginuser(request):
+    if request.method == 'GET':
+        return render(request, 'todo/loginuser.html', { 'form': AuthenticationForm()})
+    else:
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+
+        if user is None:
+            return render(request, 'todo/loginuser.html', {'form': AuthenticationForm(), 'error': 'Username and password are incorrect'})
+        else:
+            login(request, user)
+            return redirect('currenttodos')
+    
 def logoutuser(request):
     if request.method == 'POST':
         # pass

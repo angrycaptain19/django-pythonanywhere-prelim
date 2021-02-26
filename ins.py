@@ -7,3 +7,9 @@
 
 #setup a sign up form with UserCreationForm
 #put in html --> {{form}}
+
+#handle error
+
+#handle login
+
+#send the user somewhere ---- current to do

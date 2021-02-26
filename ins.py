@@ -13,3 +13,6 @@
 #handle login
 
 #send the user somewhere ---- current to do
+
+#create new url path for logout
+#create new views for logout

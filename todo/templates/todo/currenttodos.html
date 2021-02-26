@@ -3,4 +3,12 @@
 {% block content %}
 current
 
+<ul>
+    {% if todos %}
+        {% for todo in todos %}
+            <li>{{ todo.title }}</li>
+        {% endfor %}
+    {% endif %}
+</ul>
+
 {% endblock %}

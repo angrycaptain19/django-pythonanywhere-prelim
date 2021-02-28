@@ -20,25 +20,16 @@ def signupuser(request):
         if request.POST['password1'] == request.POST['password2']:
 
             try:
-                user = User.objects.create_user(request.POST['username'], password = request.POST['password1']) 
+                user = User.objects.create_user(request.POST['username'], password = request.POST['password1'])
                 user.save()
                 login(request, user)
                 return redirect('currenttodos')
-            except ValueError:
-                return render(
-                    request, 
-                    'todo/signupuser.html', 
-                    {
-                        'form':UserCreationForm(), 
-                        'error':'Please enter proper username'
-                    }
-                )
             except IntegrityError:
                 return render(
-                    request, 
-                    'todo/signupuser.html', 
+                    request,
+                    'todo/signupuser.html',
                     {
-                        'form':UserCreationForm(), 
+                        'form':UserCreationForm(),
                         'error':'That username has already been taken. Please choose a new username'
                     }
                 )
@@ -57,7 +48,7 @@ def loginuser(request):
             login(request, user)
             return redirect('currenttodos')
 
-@login_required   
+@login_required
 def logoutuser(request):
     if request.method == 'POST':
         # pass

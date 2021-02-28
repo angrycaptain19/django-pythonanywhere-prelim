@@ -34,3 +34,6 @@ urlpatterns = [
     path('todo/<int:todo_pk>/complete', views.completetodo, name='completetodo'),
     path('todo/<int:todo_pk>/delete', views.deletetodo, name='deletetodo'),
 ]
+
+handler404 = views.handler404
+handler500 = views.handler500

@@ -24,6 +24,15 @@ def signupuser(request):
                 user.save()
                 login(request, user)
                 return redirect('currenttodos')
+            except ValueError:
+                return render(
+                    request, 
+                    'todo/signupuser.html', 
+                    {
+                        'form':UserCreationForm(), 
+                        'error':'Please enter proper username'
+                    }
+                )
             except IntegrityError:
                 return render(
                     request, 
@@ -125,3 +134,8 @@ def deletetodo(request, todo_pk):
     if request.method == 'POST':
         todo.delete()
         return redirect('currenttodos')
+
+def handler404(request,exception):
+	return render(request,'todo/404.html', status=404)
+def handler500(request, *args, **argv):
+    return render(request, 'todo/500.html', status=500)

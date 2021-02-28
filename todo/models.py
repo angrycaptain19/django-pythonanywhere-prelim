@@ -18,4 +18,4 @@ class Todo(models.Model):
     #then go to admin.py
 
     def __str__(self):
-        return self.title
+        return f"{self.title} ----| Created: {self.created.strftime('%m/%d/%Y')}"

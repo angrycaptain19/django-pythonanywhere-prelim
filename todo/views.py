@@ -39,14 +39,12 @@ def signupuser(request):
 def loginuser(request):
     if request.method == 'GET':
         return render(request, 'todo/loginuser.html', { 'form': AuthenticationForm()})
-    else:
-        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+    user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
 
-        if user is None:
-            return render(request, 'todo/loginuser.html', {'form': AuthenticationForm(), 'error': 'Username and password are incorrect'})
-        else:
-            login(request, user)
-            return redirect('currenttodos')
+    if user is None:
+        return render(request, 'todo/loginuser.html', {'form': AuthenticationForm(), 'error': 'Username and password are incorrect'})
+    login(request, user)
+    return redirect('currenttodos')
 
 @login_required
 def logoutuser(request):
